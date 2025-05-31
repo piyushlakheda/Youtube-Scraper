@@ -1,4 +1,4 @@
-# YouTube Latest Videos API
+# YouTube Scraper
 
 A scalable, production-ready FastAPI backend for fetching, storing, and searching the latest YouTube videos by tag/search query, with robust background fetching, multi-key quota management, and a modular, maintainable architecture.
 
