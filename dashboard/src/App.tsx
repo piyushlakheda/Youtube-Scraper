@@ -56,48 +56,56 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
-      <h1>YouTube Video Dashboard</h1>
-      <form onSubmit={handleSearch} style={{ marginBottom: 16 }}>
+    <div style={{ maxWidth: 1300, margin: "0 auto", padding: 32 }}>
+      <h1 style={{ textAlign: "center", letterSpacing: 1.5 }}>YouTube Video Dashboard</h1>
+      <form
+        onSubmit={handleSearch}
+        style={{
+          margin: "0 auto 24px auto",
+          background: "var(--card-bg)",
+          borderRadius: 12,
+          boxShadow: "var(--shadow)",
+          padding: 24,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 16,
+          maxWidth: 700,
+        }}
+      >
         <input
           type="text"
           placeholder="Search videos..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          style={{ padding: 8, fontSize: 16, width: 300 }}
+          style={{ width: 320 }}
         />
-        <button type="submit" style={{ marginLeft: 8, padding: "8px 16px" }}>
-          Search
-        </button>
-        <select
-          value={sort}
-          onChange={handleSortChange}
-          style={{ marginLeft: 16, padding: 8, fontSize: 16 }}
-        >
+        <button type="submit">Search</button>
+        <select value={sort} onChange={handleSortChange}>
           <option value="date">Sort by Date</option>
           <option value="title">Sort by Title</option>
         </select>
       </form>
       {loading ? (
-        <div>Loading...</div>
+        <div style={{ textAlign: "center", color: "var(--accent)", fontSize: 22, marginTop: 40 }}>
+          Loading...
+        </div>
       ) : (
         <>
           <VideoList videos={videos} />
-          <div style={{ marginTop: 24, textAlign: "center" }}>
+          <div style={{ marginTop: 32, textAlign: "center" }}>
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              style={{ marginRight: 8, padding: "8px 16px" }}
             >
               Previous
             </button>
-            <span>
+            <span style={{ margin: "0 18px", fontWeight: 500, color: "var(--accent)" }}>
               Page {page} of {Math.ceil(total / PAGE_SIZE) || 1}
             </span>
             <button
               onClick={() => setPage((p) => (p * PAGE_SIZE < total ? p + 1 : p))}
               disabled={page * PAGE_SIZE >= total}
-              style={{ marginLeft: 8, padding: "8px 16px" }}
             >
               Next
             </button>

@@ -44,7 +44,7 @@ cd <repo-directory>
 
 ### 2. Configure environment variables
 
-Copy `.env.example` to `.env` and fill in your values:
+In `.env` fill your values:
 
 ```env
 YOUTUBE_API_KEYS=YOUR_API_KEY_1,YOUR_API_KEY_2
