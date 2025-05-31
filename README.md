@@ -1,4 +1,4 @@
-# YouTube Scraper
+# YouTube Latest Videos API
 
 A scalable, production-ready FastAPI backend for fetching, storing, and searching the latest YouTube videos by tag/search query, with robust background fetching, multi-key quota management, and a modular, maintainable architecture.
 
@@ -44,7 +44,7 @@ cd <repo-directory>
 
 ### 2. Configure environment variables
 
-Copy `.env.example` to `.env` and fill in your values:
+`.env` and fill in your values:
 
 ```env
 YOUTUBE_API_KEYS=YOUR_API_KEY_1,YOUR_API_KEY_2
@@ -123,6 +123,16 @@ npm run build
 - Start the backend (with Docker or locally) so the API is available at `http://localhost:8000`.
 - Start the dashboard with `npm start` in the `dashboard/` directory.
 - The dashboard will communicate with the backend via REST API, with CORS enabled.
+
+
+## Backend Optimization Suggestions
+
+- **Distributed Locking:** Use Redis with the Redlock algorithm to ensure only one instance fetches from the YouTube API at a time in a multi-instance deployment.
+- **Rate Limiting:** Implement rate limiting on API endpoints to prevent abuse and accidental quota exhaustion.
+- **API Key Rotation:** Track quota usage for each YouTube API key and rotate keys automatically when limits are reached.
+- **Caching:** Use Redis or another in-memory cache for frequently accessed video/search results to reduce database load.
+- **Asynchronous Task Queue:** Offload heavy or periodic tasks to a distributed task queue (e.g., Celery with Redis/RabbitMQ) for robust background processing.
+- **Database Indexing:** Regularly review and optimize database indexes for search and retrieval patterns.
 
 
 ## API Usage
