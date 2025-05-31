@@ -1,4 +1,4 @@
-# YouTube Latest Videos API
+# YouTube Scraper
 
 A scalable, production-ready FastAPI backend for fetching, storing, and searching the latest YouTube videos by tag/search query, with robust background fetching, multi-key quota management, and a modular, maintainable architecture.
 
@@ -33,7 +33,7 @@ A scalable, production-ready FastAPI backend for fetching, storing, and searchin
 └── README.md
 ```
 
-## Setup
+## Backend Setup
 
 ### 1. Clone the repository
 
@@ -44,7 +44,7 @@ cd <repo-directory>
 
 ### 2. Configure environment variables
 
-In `.env` fill your values:
+Copy `.env.example` to `.env` and fill in your values:
 
 ```env
 YOUTUBE_API_KEYS=YOUR_API_KEY_1,YOUR_API_KEY_2
@@ -79,6 +79,52 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
+---
+
+## Frontend (Dashboard) Setup
+
+### 1. Install dependencies
+
+```bash
+cd dashboard
+npm install
+```
+
+### 2. Configure API base URL (optional)
+
+By default, the dashboard expects the backend at `http://localhost:8000`.  
+To change this, create a `.env` file in the `dashboard/` directory:
+
+```
+REACT_APP_API_BASE=http://localhost:8000
+```
+
+### 3. Run the dashboard in development
+
+```bash
+npm start
+```
+
+- The dashboard will be available at [http://localhost:3000](http://localhost:3000)
+- It will auto-reload on code changes.
+
+### 4. Build for production
+
+```bash
+npm run build
+```
+
+- This will create a production-ready build in `dashboard/build/`.
+
+---
+
+## Running Backend and Frontend Together
+
+- Start the backend (with Docker or locally) so the API is available at `http://localhost:8000`.
+- Start the dashboard with `npm start` in the `dashboard/` directory.
+- The dashboard will communicate with the backend via REST API, with CORS enabled.
+
+
 ## API Usage
 
 ### Get latest videos (paginated)
@@ -111,4 +157,3 @@ GET /
 - Get your API keys from the [Google Cloud Console](https://console.cloud.google.com/).
 - Enable the YouTube Data API v3 for your project.
 - Add multiple keys in `.env` as `YOUTUBE_API_KEYS=key1,key2,key3`.
-
